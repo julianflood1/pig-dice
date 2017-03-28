@@ -28,21 +28,21 @@ Player.prototype.roll = function() {
       }
     } else {
       this.turnScore === 0;
-
       endTurn();
       }
     }
 
     function endTurn() {
-      player1.turnScore += player1.totalScore;
+      player1.totalScore += player1.turnScore;
       player1.turnScore = 0;
-      player2.turnScore += player2.totalScore;
+      player2.totalScore += player2.turnScore;
       player2.turnScore = 0;
-         if(player1.activeTurn === true) {
+         if (player1.activeTurn === true) {
            player1.activeTurn = false;
          } else {
            player1.activeTurn = true;
          }
+
          if(player2.activeTurn === true) {
            player2.activeTurn = false;
          } else {
