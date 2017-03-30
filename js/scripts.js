@@ -49,27 +49,84 @@ Player.prototype.roll = function() {
         }
       }
 
-
-
 // FrontEnd Logic
 $(document).ready(function() {
 
   player1 = new Player("player1", true, 0, 0);
   player2 = new Player("player2", false, 0, 0);
+
   $('#active-player').text("Player 1");
+  $('#current-roll').text('0');
+  $('#turn-score').text('0');
+  $('#player1-score').text('0');
+  $('#player2-score').text('0');
+
+
   $('button#roll').click(function() {
-    var playerName;
+
+    if (player1.activeTurn === true) {
+      player1.roll();
+      if (player1.activeTurn === false) {
+        $('#active-player').text("Player 2")
+      } else {
+        $('#current-roll').text(player1.currentRoll);
+        $('#turn-score').text(player1.turnScore);
+        $('#player1-score').text(player1.score);
+        $('#active-player').text("Player 1");
+      }
+    } else {
+      player2.roll();
+      if (player2.activeTurn === false) {
+        $('#active-player').text("Player 1")
+      } else {
+        $('#current-roll').text(player2.currentRoll);
+        $('#turn-score').text(player2.turnScore);
+        $('#player2-score').text(player2.score);
+        $('#active-player').text("Player 2");
+      }
+    }
+
     if (player1.score >= 100) {
       $('#main').hide();
-      $('player1-win').show();
+      $('#player1-win').show();
     } else if (player2.score >= 100) {
       $('#main').hide();
       $('#player2-win').show();
     }
-  }
+  });
 
- //   $('#player1.player1Roll').submit(function(event) {
- //
- //    event.preventDefault();
- // });
+  $('button#hold').click(function() {
+
+    if (player1.score >= 100) {
+      $('#main').hide();
+      $('#player1-win').show();
+    } else if (player2.score >= 100) {
+      $('#main').hide();
+      $('#player2-win').show();
+    }
+
+    if (player1.activeTurn === true) {
+      endTurn();
+      $('#current-roll').text(player1.currentRoll);
+      $('#turn-score').text(player1.turnScore);
+      $('#player1-score').text(player1.score);
+      $('#active-player').text("Player 2");
+    }  else {
+      endTurn();
+      $('#current-roll').text(player2.currentRoll);
+      $('#turn-score').text(player2.turnScore);
+      $('#player2-score').text(player2.score);
+      $('#active-player').text("Player 1");
+    }
+
+
+
+
+  });
+
+
+
+
+
+
 });
