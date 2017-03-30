@@ -8,20 +8,26 @@
     <title>Pig Dice</title>
   </head>
   <body>
-  <div class="container">
+  <div class="container" id="main">
     <h1>Pig Dice</h1>
     <p>Click roll to play Pig Dice!</p>
-    <div id="player1">
-      <button type="submit" class="btn btn-success player1Roll">Roll!</button>
-      <button type="submit" class="btn btn-danger player1Hold">Hold</button>
-      <h2 id ="player1CurrentScore"></h2>
-  </div>
-  <div id="player2">
-    <button type="submit" class="btn btn-success player2Roll">Roll!</button>
-    <button type="submit" class="btn btn-danger player2Hold">Hold</button>
-    <h2 id="player2CurrentScore"></h2>
-  </div>
+    <h2 span id="activePlayer"></span>'s turn</h2>
+    <button type="submit" class="btn btn-success" id="roll">Roll!</button>
+    <button type="submit" class="btn btn-danger" id="hold">Hold</button>
 
-  </div>
+    <h3>Player 1 score:<span id="player1-score"></span></h3>
+    <h3>Player 2 score:<span id="player2-score"></span></h3>
+
+    <h1>Roll:<span id="current-roll"></span></h1>
+    <h1>Turn Score:<span id="turn-score"></span></h1>
+
+
+
+    </div>
+    <div id="player1-win">
+      <h1>PLAYER 1 WINS!</h1>
+    </div>
+    <div id="player2-win">
+      <h1>PLAYER 2 WINS!</h1>
   </body>
 </html>

@@ -1,8 +1,5 @@
 //BackEnd Logic
 
-var player1 = new Player("player1", 0, 0, true);
-var player2 = new Player("player2", 0, 0, false);
-
 var randomRoll = function(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
@@ -10,12 +7,12 @@ var randomRoll = function(min, max) {
 }
 
 
-function Player(playerName, currentScore, totalScore, activeTurn, currentRoll) {
+function Player(playerName, activeTurn, score, currentRoll) {
   this.playerName = playerName;
-  this.turnScore = 0;
-  this.totalScore = totalScore;
   this.activeTurn = activeTurn;
+  this.score = score;
   this.currentRoll = currentRoll;
+  this.turnScore = 0;
 }
 
 Player.prototype.roll = function() {
@@ -23,19 +20,21 @@ Player.prototype.roll = function() {
     if (this.activeTurn === true) {
       if (roll > 1) {
         this.currentRoll = roll;
-        console.log(this);
         this.turnScore += this.currentRoll;
-      }
-    } else {
-      this.turnScore === 0;
-      endTurn();
-      }
+        console.log(this);
+      } else {
+        this.currentRoll = roll;
+        this.turnScore = 0;
+        endTurn();
+        console.log(this);
+        }
     }
+  }
 
     function endTurn() {
-      player1.totalScore += player1.turnScore;
+      player1.score += player1.turnScore;
       player1.turnScore = 0;
-      player2.totalScore += player2.turnScore;
+      player2.score += player2.turnScore;
       player2.turnScore = 0;
          if (player1.activeTurn === true) {
            player1.activeTurn = false;
@@ -43,7 +42,7 @@ Player.prototype.roll = function() {
            player1.activeTurn = true;
          }
 
-         if(player2.activeTurn === true) {
+         if (player2.activeTurn === true) {
            player2.activeTurn = false;
          } else {
            player2.activeTurn = true;
@@ -52,10 +51,25 @@ Player.prototype.roll = function() {
 
 
 
-//FrontEnd Logic
-// $(document).ready(function() {
-//   $('#player1.player1Roll').submit(function(event) {
-//
-//     event.preventDefault();
-// });
-// });
+// FrontEnd Logic
+$(document).ready(function() {
+
+  player1 = new Player("player1", true, 0, 0);
+  player2 = new Player("player2", false, 0, 0);
+  $('#active-player').text("Player 1");
+  $('button#roll').click(function() {
+    var playerName;
+    if (player1.score >= 100) {
+      $('#main').hide();
+      $('player1-win').show();
+    } else if (player2.score >= 100) {
+      $('#main').hide();
+      $('#player2-win').show();
+    }
+  }
+
+ //   $('#player1.player1Roll').submit(function(event) {
+ //
+ //    event.preventDefault();
+ // });
+});
