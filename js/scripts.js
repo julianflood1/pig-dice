@@ -83,24 +83,26 @@ $(document).ready(function() {
         $('#turn-score').text(player2.turnScore);
         $('#player2-score').text(player2.score);
         $('#active-player').text("Player 2");
+
+        if (player1.score + player1.turnScore >= 100) {
+          $('#main').hide();
+          $('#player1-win').show();
+        } else if (player2.score + player2.turnScore >= 100) {
+          $('#main').hide();
+          $('#player2-win').show();
+        }
       }
     }
 
-    if (player1.score >= 100) {
-      $('#main').hide();
-      $('#player1-win').show();
-    } else if (player2.score >= 100) {
-      $('#main').hide();
-      $('#player2-win').show();
-    }
+
   });
 
   $('button#hold').click(function() {
 
-    if (player1.score >= 100) {
+    if (player1.score + player1.turnScore >= 100) {
       $('#main').hide();
       $('#player1-win').show();
-    } else if (player2.score >= 100) {
+    } else if (player2.score + player2.turnScore >= 100) {
       $('#main').hide();
       $('#player2-win').show();
     }
@@ -119,14 +121,6 @@ $(document).ready(function() {
       $('#active-player').text("Player 1");
     }
 
-
-
-
   });
-
-
-
-
-
 
 });
