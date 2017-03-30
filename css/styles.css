@@ -4,3 +4,7 @@
 #player2-win {
   display: none;
 }
+img {
+  float: right;
+  border: black 10px solid;
+}
